@@ -116,17 +116,27 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\cellularApp.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\cellularApp.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs2010\openframeworksLib.vcxproj">
       <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseAcceptNewConfigRule.cpp" />
+    <ClCompile Include="BaseCell.cpp" />
+    <ClCompile Include="CellGrid.cpp" />
+    <ClCompile Include="BaseEntireGridRule.cpp" />
+    <ClCompile Include="BaseSingleCellRule.cpp" />
+    <ClCompile Include="cellularApp.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseAcceptNewConfigRule.h" />
+    <ClInclude Include="BaseCell.h" />
+    <ClInclude Include="CellGrid.h" />
+    <ClInclude Include="BaseEntireGridRule.h" />
+    <ClInclude Include="BaseSingleCellRule.h" />
+    <ClInclude Include="cellularApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

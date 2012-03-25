@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="BaseCell.cpp" />
+    <ClCompile Include="cellularApp.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="BaseSingleCellRule.cpp" />
+    <ClCompile Include="BaseEntireGridRule.cpp" />
+    <ClCompile Include="BaseAcceptNewConfigRule.cpp" />
+    <ClCompile Include="CellGrid.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseCell.h" />
+    <ClInclude Include="cellularApp.h" />
+    <ClInclude Include="BaseSingleCellRule.h" />
+    <ClInclude Include="BaseEntireGridRule.h" />
+    <ClInclude Include="BaseAcceptNewConfigRule.h" />
+    <ClInclude Include="CellGrid.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{662d614e-224a-4dc4-a844-ff5788353ff0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{fae2db97-db4c-41e5-8c7c-c233bb8ab83c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
