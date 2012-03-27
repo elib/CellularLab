@@ -1,20 +1,38 @@
 #include "cellularApp.h"
 
+#include "CellGrid.h"
+#include "CellFactory.h"
+#include "DecayingCellRule.h"
+#include "AcceptIfConnectedRule.h"
+#include "AssignResourcesRule.h"
+
 //--------------------------------------------------------------
 void cellularApp::setup()
 {
+	_cellGrid = new CellGrid();
+	_cellGrid->Setup(MEGASTRUCTURE_CELL);
+
+	DecayingCellRule rule1;
+	AssignResourcesRule rule2;
+	AcceptIfConnectedRule rule3;
+
+	_cellGrid->AddCellRule(&rule1);
+	_cellGrid->AddGlobalRule(&rule2);
+	_cellGrid->AddAcceptRule(&rule3);
 }
 
 //--------------------------------------------------------------
 void cellularApp::update()
 {
-
+	_cellGrid->Update();
 }
 
 //--------------------------------------------------------------
 void cellularApp::draw()
 {
 	ofBackground(100, 255);
+
+
 }
 
 //--------------------------------------------------------------

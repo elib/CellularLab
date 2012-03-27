@@ -1,21 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="BaseCell.cpp" />
-    <ClCompile Include="cellularApp.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="BaseSingleCellRule.cpp" />
-    <ClCompile Include="BaseEntireGridRule.cpp" />
-    <ClCompile Include="BaseAcceptNewConfigRule.cpp" />
-    <ClCompile Include="CellGrid.cpp" />
+    <ClCompile Include="BaseAcceptNewConfigRule.cpp">
+      <Filter>Source\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEntireGridRule.cpp">
+      <Filter>Source\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseSingleCellRule.cpp">
+      <Filter>Source\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCell.cpp">
+      <Filter>Source\BaseClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="AcceptIfConnectedRule.cpp">
+      <Filter>Source\Megastructure classes</Filter>
+    </ClCompile>
+    <ClCompile Include="AssignResourcesRule.cpp">
+      <Filter>Source\Megastructure classes</Filter>
+    </ClCompile>
+    <ClCompile Include="DecayingCellRule.cpp">
+      <Filter>Source\Megastructure classes</Filter>
+    </ClCompile>
+    <ClCompile Include="MegastructureCell.cpp">
+      <Filter>Source\Megastructure classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CellFactory.cpp">
+      <Filter>Source\Grid mechanism</Filter>
+    </ClCompile>
+    <ClCompile Include="CellGrid.cpp">
+      <Filter>Source\Grid mechanism</Filter>
+    </ClCompile>
+    <ClCompile Include="cellularApp.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseCell.h" />
-    <ClInclude Include="cellularApp.h" />
-    <ClInclude Include="BaseSingleCellRule.h" />
-    <ClInclude Include="BaseEntireGridRule.h" />
-    <ClInclude Include="BaseAcceptNewConfigRule.h" />
-    <ClInclude Include="CellGrid.h" />
+    <ClInclude Include="BaseAcceptNewConfigRule.h">
+      <Filter>Header\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseSingleCellRule.h">
+      <Filter>Header\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCell.h">
+      <Filter>Header\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntireGridRule.h">
+      <Filter>Header\BaseClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="AcceptIfConnectedRule.h">
+      <Filter>Header\Megastructure classes</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignResourcesRule.h">
+      <Filter>Header\Megastructure classes</Filter>
+    </ClInclude>
+    <ClInclude Include="DecayingCellRule.h">
+      <Filter>Header\Megastructure classes</Filter>
+    </ClInclude>
+    <ClInclude Include="MegastructureCell.h">
+      <Filter>Header\Megastructure classes</Filter>
+    </ClInclude>
+    <ClInclude Include="CellFactory.h">
+      <Filter>Header\Grid mechanism</Filter>
+    </ClInclude>
+    <ClInclude Include="CellGrid.h">
+      <Filter>Header\Grid mechanism</Filter>
+    </ClInclude>
+    <ClInclude Include="cellularApp.h">
+      <Filter>Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source">
@@ -23,6 +79,24 @@
     </Filter>
     <Filter Include="Header">
       <UniqueIdentifier>{fae2db97-db4c-41e5-8c7c-c233bb8ab83c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\BaseClasses">
+      <UniqueIdentifier>{3371bee5-bd75-47f5-9300-ae04f4c6631c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Megastructure classes">
+      <UniqueIdentifier>{327c2966-e0cb-40a2-9f98-70ace99375bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\BaseClasses">
+      <UniqueIdentifier>{4b030f4e-23c8-4c58-acd4-1fb0021c73b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Megastructure classes">
+      <UniqueIdentifier>{e2b48312-9258-43fd-a4e0-9ba7c0ee82e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\Grid mechanism">
+      <UniqueIdentifier>{b1bccd83-bdfb-415d-87f0-dcd8fbc021a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Grid mechanism">
+      <UniqueIdentifier>{537213fe-340e-4612-895c-835a70304046}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

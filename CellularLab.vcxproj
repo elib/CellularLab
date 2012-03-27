@@ -122,21 +122,31 @@ if not exist "$(ProjectDir)\bin\data" mkdir  "$(ProjectDir)\bin\data"
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AcceptIfConnectedRule.cpp" />
+    <ClCompile Include="AssignResourcesRule.cpp" />
     <ClCompile Include="BaseAcceptNewConfigRule.cpp" />
     <ClCompile Include="BaseCell.cpp" />
+    <ClCompile Include="CellFactory.cpp" />
     <ClCompile Include="CellGrid.cpp" />
     <ClCompile Include="BaseEntireGridRule.cpp" />
     <ClCompile Include="BaseSingleCellRule.cpp" />
     <ClCompile Include="cellularApp.cpp" />
+    <ClCompile Include="DecayingCellRule.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MegastructureCell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AcceptIfConnectedRule.h" />
+    <ClInclude Include="AssignResourcesRule.h" />
     <ClInclude Include="BaseAcceptNewConfigRule.h" />
     <ClInclude Include="BaseCell.h" />
+    <ClInclude Include="CellFactory.h" />
     <ClInclude Include="CellGrid.h" />
     <ClInclude Include="BaseEntireGridRule.h" />
     <ClInclude Include="BaseSingleCellRule.h" />
     <ClInclude Include="cellularApp.h" />
+    <ClInclude Include="DecayingCellRule.h" />
+    <ClInclude Include="MegastructureCell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
