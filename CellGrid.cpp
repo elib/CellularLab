@@ -17,6 +17,8 @@ CellGrid::~CellGrid(void)
 
 void CellGrid::AddCellRule(BaseSingleCellRule* newRule)
 {
+	BaseSingleCellRule* rule = newRule->Copy();
+	_singleCellRules.push_back(rule);
 }
 
 void CellGrid::AddGlobalRule(BaseEntireGridRule* newRule)
@@ -28,17 +30,28 @@ void CellGrid::AddAcceptRule(BaseAcceptNewConfigRule* newRule)
 }
 
 
-void CellGrid::Setup(CellTypes cellTypeToCreate)
+void CellGrid::InitCells(CellTypes cellTypeToCreate, BaseCell*** targetGrid)
 {
 	//create new grid of cells
-	_currentCells = new BaseCell*[10];
+	(*targetGrid) = new BaseCell*[10];
 	for(int i = 0; i < 10; i++)
 	{
-		_currentCells[i] = CellFactory::CreateBaseCell(cellTypeToCreate);
+		(*targetGrid)[i] = CellFactory::CreateBaseCell(cellTypeToCreate);
 	}
+}
 
+
+void CellGrid::Setup(CellTypes cellTypeToCreate)
+{
+	InitCells(cellTypeToCreate, &_currentCells);
+	InitCells(cellTypeToCreate, &_nextCells);
 }
 
 void CellGrid::Update()
 {
+}
+
+void CellGrid::Draw()
+{
+
 }

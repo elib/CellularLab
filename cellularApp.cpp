@@ -31,7 +31,7 @@ void cellularApp::update()
 void cellularApp::draw()
 {
 	ofBackground(100, 255);
-
+	_cellGrid->Draw();
 
 }
 

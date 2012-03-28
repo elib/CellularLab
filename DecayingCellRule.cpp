@@ -17,3 +17,8 @@ DecayingCellRule::~DecayingCellRule(void)
 void DecayingCellRule::ApplyRule(BaseCell* cell, CellGrid* grid, int index_x, int index_y)
 {
 }
+
+BaseSingleCellRule* DecayingCellRule::Copy()
+{
+	return new DecayingCellRule();
+}
