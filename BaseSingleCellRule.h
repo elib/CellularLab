@@ -2,8 +2,7 @@
 class BaseSingleCellRule
 {
 public:
-	BaseSingleCellRule(void);
-	~BaseSingleCellRule(void);
+	virtual ~BaseSingleCellRule(void);
 
-	virtual void ApplyRule(class BaseCell* cell) = 0; 
+	virtual void ApplyRule(class BaseCell* cell, class CellGrid* grid, int index_x, int index_y) = 0;
 };
