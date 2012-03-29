@@ -10,5 +10,6 @@ public:
 
 
 	virtual void ApplyRule(CellGrid* grid) = 0;
+	virtual BaseEntireGridRule* Copy() = 0;
 
 };

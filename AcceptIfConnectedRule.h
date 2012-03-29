@@ -9,5 +9,6 @@ public:
 	~AcceptIfConnectedRule(void);
 
 	virtual bool AcceptRule(CellGrid* grid);
+	virtual BaseAcceptNewConfigRule* Copy();
 };
 

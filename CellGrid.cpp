@@ -23,10 +23,14 @@ void CellGrid::AddCellRule(BaseSingleCellRule* newRule)
 
 void CellGrid::AddGlobalRule(BaseEntireGridRule* newRule)
 {
+	BaseEntireGridRule* rule = newRule->Copy();
+	_entireGridRules.push_back(rule);
 }
 
 void CellGrid::AddAcceptRule(BaseAcceptNewConfigRule* newRule)
 {
+	BaseAcceptNewConfigRule* rule = newRule->Copy();
+	_acceptNewConfigRules.push_back(rule);
 }
 
 
