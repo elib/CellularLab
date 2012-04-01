@@ -13,7 +13,7 @@ MegastructureCell::~MegastructureCell(void)
 BaseCell* MegastructureCell::Copy()
 {
 	MegastructureCell* newcell = new MegastructureCell();
-	for(int i = 0; i < CellProperties.size(); i++)
+	for(unsigned int i = 0; i < CellProperties.size(); i++)
 	{
 		//copy properties
 		//newcell->CellProperties

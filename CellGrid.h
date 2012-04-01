@@ -20,7 +20,6 @@ class CellGrid
 {
 public:
 
-
 	CellGrid(void);
 	~CellGrid(void);
 

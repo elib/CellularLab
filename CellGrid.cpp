@@ -10,7 +10,11 @@
 
 CellGrid::CellGrid(void)
 {
-
+	gridWidth = 0;
+	gridHeight = 0;
+	
+	_currentCells = NULL;
+	_nextCells = NULL;
 }
 
 CellGrid::~CellGrid(void)
@@ -45,12 +49,12 @@ void CellGrid::InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid)
 {
 	//create new grid of cells
 	(*targetGrid) = new BaseCell**[gridWidth];
-	for(int i = 0; i < gridWidth; i++)
+	for(int x = 0; x < gridWidth; x++)
 	{
-		(*targetGrid)[i] = new BaseCell*[gridHeight];
-		for(int j = 0; j < gridHeight; j++)
+		(*targetGrid)[x] = new BaseCell*[gridHeight];
+		for(int y = 0; y < gridHeight; y++)
 		{
-			(*targetGrid)[i][j] = CellFactory::CreateBaseCell(cellTypeToCreate);
+			(*targetGrid)[x][y] = CellFactory::CreateBaseCell(cellTypeToCreate);
 		}
 	}
 }
@@ -114,6 +118,10 @@ void CellGrid::applySingleCellRules()
 
 void CellGrid::applyEntireGridRules()
 {
+	for(int i = 0; i < _entireGridRules.size(); i++)
+	{
+		_entireGridRules[i]->ApplyRule(this);
+	}
 }
 
 bool CellGrid::doesAcceptNewConfiguration()
