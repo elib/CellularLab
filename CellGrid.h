@@ -24,7 +24,7 @@ public:
 	~CellGrid(void);
 
 	void Update();
-	void Draw();
+	void Draw(int screenwid, int screenhei);
 	void Setup(CellTypes typeToCreate, int width, int height);
 
 

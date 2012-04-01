@@ -135,7 +135,23 @@ void CellGrid::copyToNext()
 	copyToTarget(_currentCells, _nextCells);
 }
 
-void CellGrid::Draw()
+void CellGrid::Draw(int screenwid, int screenhei)
 {
 	//run over current generation and draw them
+
+	// numcells * cell_width = totalwidth
+
+	float cellWidth = screenwid / ((float) gridWidth);
+	float cellHeight = screenhei / ((float) gridHeight);
+
+	for(int x = 0; x < gridWidth; x++)
+	{
+		for(int y = 0; y < gridHeight; y++)
+		{
+			ofSetColor(0);
+			ofNoFill();
+			ofRect(x * cellWidth, y * cellHeight, 0, cellWidth, cellHeight);
+		}
+	}
+
 }
