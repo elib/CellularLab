@@ -10,7 +10,7 @@
 void cellularApp::setup()
 {
 	_cellGrid = new CellGrid();
-	_cellGrid->Setup(MEGASTRUCTURE_CELL);
+	_cellGrid->Setup(MEGASTRUCTURE_CELL, 10, 10);
 
 	DecayingCellRule rule1;
 	AssignResourcesRule rule2;

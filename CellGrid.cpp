@@ -6,6 +6,8 @@
 #include "BaseEntireGridRule.h"
 #include "BaseSingleCellRule.h"
 
+#include "ofMain.h"
+
 CellGrid::CellGrid(void)
 {
 
@@ -33,29 +35,99 @@ void CellGrid::AddAcceptRule(BaseAcceptNewConfigRule* newRule)
 	_acceptNewConfigRules.push_back(rule);
 }
 
-
-void CellGrid::InitCells(CellTypes cellTypeToCreate, BaseCell*** targetGrid)
+const BaseCell *** CellGrid::CurrentConfiguration()
 {
-	//create new grid of cells
-	(*targetGrid) = new BaseCell*[10];
-	for(int i = 0; i < 10; i++)
-	{
-		(*targetGrid)[i] = CellFactory::CreateBaseCell(cellTypeToCreate);
-	}
+	return (const BaseCell***)_currentCells;
 }
 
 
-void CellGrid::Setup(CellTypes cellTypeToCreate)
+void CellGrid::InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid)
 {
+	//create new grid of cells
+	(*targetGrid) = new BaseCell**[gridWidth];
+	for(int i = 0; i < gridWidth; i++)
+	{
+		(*targetGrid)[i] = new BaseCell*[gridHeight];
+		for(int j = 0; j < gridHeight; j++)
+		{
+			(*targetGrid)[i][j] = CellFactory::CreateBaseCell(cellTypeToCreate);
+		}
+	}
+}
+
+void CellGrid::Setup(CellTypes cellTypeToCreate, int width, int height)
+{
+	gridWidth = width;
+	gridHeight = height;
 	InitCells(cellTypeToCreate, &_currentCells);
 	InitCells(cellTypeToCreate, &_nextCells);
 }
 
 void CellGrid::Update()
 {
+	//decide if another generation is necessary (else exit)
+	int frames = ofGetFrameNum();
+	if(frames % 60 != 0)
+	{
+		return;
+	}
+
+	bool accepted = false;
+	while(!accepted)
+	{
+		copyToNext();
+		applySingleCellRules();
+		applyEntireGridRules();
+		accepted = doesAcceptNewConfiguration();
+	}
+
+	//we should be accepted by now, so copy back to _currentGrid
+	copyToTarget(_nextCells, _currentCells);
+}
+
+void CellGrid::copyToTarget(BaseCell *** source, BaseCell *** target)
+{
+	for(int x = 0; x < gridWidth; x++)
+	{
+		for(int y = 0; y < gridHeight; y++)
+		{
+			delete target[x][y];
+			target[x][y] = source[x][y]->Copy();
+		}
+	}
+}
+
+void CellGrid::applySingleCellRules()
+{
+	//apply rules for this generation
+	for(int x = 0; x < gridWidth; x++)
+	{
+		for(int y = 0; y < gridHeight; y++)
+		{
+			for(int i = 0; i < _singleCellRules.size(); i++)
+			{
+				_singleCellRules[i]->ApplyRule(_nextCells[x][y], this, x, y);
+			}
+		}
+	}
+}
+
+void CellGrid::applyEntireGridRules()
+{
+}
+
+bool CellGrid::doesAcceptNewConfiguration()
+{
+	return true;
+}
+
+void CellGrid::copyToNext()
+{
+	//copy next generation into current generation
+	copyToTarget(_currentCells, _nextCells);
 }
 
 void CellGrid::Draw()
 {
-
+	//run over current generation and draw them
 }

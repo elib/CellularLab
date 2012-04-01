@@ -26,19 +26,29 @@ public:
 
 	void Update();
 	void Draw();
-	void Setup(CellTypes typeToCreate);
+	void Setup(CellTypes typeToCreate, int width, int height);
 
 
 	void AddCellRule(BaseSingleCellRule* newRule);
 	void AddGlobalRule(BaseEntireGridRule* newRule);
 	void AddAcceptRule(BaseAcceptNewConfigRule* newRule);
 
-	BaseCell ** _currentCells;
-	BaseCell ** _nextCells;
+	const BaseCell *** CurrentConfiguration();
+
+	int gridWidth, gridHeight;
 
 private:
 
-	void InitCells(CellTypes cellTypeToCreate, BaseCell*** targetGrid);
+	BaseCell *** _currentCells;
+	BaseCell *** _nextCells;
+
+	void copyToTarget(BaseCell *** source, BaseCell *** target);
+	void copyToNext();
+	void applySingleCellRules();
+	void applyEntireGridRules();
+	bool doesAcceptNewConfiguration();
+
+	void InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid);
 
 	SingleCellRuleList _singleCellRules;
 	EntireGridRuleList _entireGridRules;

@@ -7,5 +7,7 @@ class MegastructureCell : public BaseCell
 public:
 	MegastructureCell(void);
 	~MegastructureCell(void);
+
+	virtual BaseCell* Copy();
 };
 

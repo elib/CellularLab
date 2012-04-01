@@ -13,5 +13,7 @@ public:
 	BaseCell(void);
 	~BaseCell(void);
 
+	virtual BaseCell* Copy() = 0;
+
 	PropertyList CellProperties;
 };
