@@ -39,9 +39,22 @@ void CellGrid::AddAcceptRule(BaseAcceptNewConfigRule* newRule)
 	_acceptNewConfigRules.push_back(rule);
 }
 
-const BaseCell *** CellGrid::CurrentConfiguration()
+const BaseCell* CellGrid::GetCurrentConfigurationAt(int x, int y)
 {
-	return (const BaseCell***)_currentCells;
+	return getCell(_currentCells, x, y);
+}
+
+const BaseCell* CellGrid::GetNextConfiguratonAt(int x, int y)
+{
+	return getCell(_nextCells, x, y);
+}
+
+const BaseCell* CellGrid::getCell(BaseCell*** target, int x, int y)
+{
+	int useX = (x + gridWidth) % gridWidth;
+	int useY = (y + gridHeight) % gridHeight;
+
+	return static_cast<const BaseCell*>(target[useX][useY]);
 }
 
 
@@ -118,7 +131,7 @@ void CellGrid::applySingleCellRules()
 
 void CellGrid::applyEntireGridRules()
 {
-	for(int i = 0; i < _entireGridRules.size(); i++)
+	for(unsigned int i = 0; i < _entireGridRules.size(); i++)
 	{
 		_entireGridRules[i]->ApplyRule(this);
 	}
@@ -126,6 +139,13 @@ void CellGrid::applyEntireGridRules()
 
 bool CellGrid::doesAcceptNewConfiguration()
 {
+	for(unsigned int i = 0; i < _acceptNewConfigRules.size(); i++)
+	{
+		if(!_acceptNewConfigRules[i]->AcceptRule(this))
+			return false;
+	}
+
+	//made it through them all ... rejoice
 	return true;
 }
 
@@ -138,9 +158,6 @@ void CellGrid::copyToNext()
 void CellGrid::Draw(int screenwid, int screenhei)
 {
 	//run over current generation and draw them
-
-	// numcells * cell_width = totalwidth
-
 	float cellWidth = screenwid / ((float) gridWidth);
 	float cellHeight = screenhei / ((float) gridHeight);
 
@@ -153,5 +170,4 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			ofRect(x * cellWidth, y * cellHeight, 0, cellWidth, cellHeight);
 		}
 	}
-
 }

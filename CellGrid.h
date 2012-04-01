@@ -32,7 +32,8 @@ public:
 	void AddGlobalRule(BaseEntireGridRule* newRule);
 	void AddAcceptRule(BaseAcceptNewConfigRule* newRule);
 
-	const BaseCell *** CurrentConfiguration();
+	const BaseCell* GetCurrentConfigurationAt(int x, int y);
+	const BaseCell* GetNextConfiguratonAt(int x, int y);
 
 	int gridWidth, gridHeight;
 
@@ -46,6 +47,8 @@ private:
 	void applySingleCellRules();
 	void applyEntireGridRules();
 	bool doesAcceptNewConfiguration();
+
+	const BaseCell* getCell(BaseCell*** target, int x, int y);
 
 	void InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid);
 
