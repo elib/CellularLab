@@ -165,9 +165,28 @@ void CellGrid::Draw(int screenwid, int screenhei)
 	{
 		for(int y = 0; y < gridHeight; y++)
 		{
-			ofSetColor(0);
-			ofNoFill();
-			ofRect(x * cellWidth, y * cellHeight, 0, cellWidth, cellHeight);
+			float coordx = (x + 0.5) * cellWidth;
+			float coordy = (y + 0.5) * cellHeight;
+
+			int decay, generation;
+			int rel = 255 / 10;
+			decay = GetCurrentConfigurationAt(x, y)->CellProperties.at("decay");
+			generation = GetCurrentConfigurationAt(x, y)->CellProperties.at("generation");
+
+			ofSetRectMode(OF_RECTMODE_CENTER);
+			ofFill();
+
+			//Border -- gets lighter as decays
+			ofSetColor(decay * rel);
+			ofRect(coordx, coordy, 0, cellWidth, cellHeight);
+
+			//white "background" square"
+			ofSetColor(255);
+			ofRect(coordx, coordy, 0, cellWidth * 0.8, cellHeight * 0.9);
+
+			//inner square -- generation indicator (redder is newer)
+			ofSetColor(255, rel * generation, rel * generation);
+			ofRect(coordx, coordy, 0, cellWidth * 0.2, cellHeight * 0.2);
 		}
 	}
 }
