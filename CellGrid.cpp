@@ -168,8 +168,12 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			float coordx = (x + 0.5) * cellWidth;
 			float coordy = (y + 0.5) * cellHeight;
 
+			const int MAX_DECAY = 10;
+			const int MAX_GENERATION = 10;
+
 			int decay, generation;
-			int rel = 255 / 10;
+			int rel_decay = 255 / MAX_DECAY;
+			int rel_generation = 255 / MAX_GENERATION;
 			decay = GetCurrentConfigurationAt(x, y)->CellProperties.at("decay");
 			generation = GetCurrentConfigurationAt(x, y)->CellProperties.at("generation");
 
@@ -177,7 +181,7 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			ofFill();
 
 			//Border -- gets lighter as decays
-			ofSetColor(decay * rel);
+			ofSetColor(decay * rel_decay);
 			ofRect(coordx, coordy, 0, cellWidth, cellHeight);
 
 			//white "background" square"
@@ -185,7 +189,7 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			ofRect(coordx, coordy, 0, cellWidth * 0.8, cellHeight * 0.9);
 
 			//inner square -- generation indicator (redder is newer)
-			ofSetColor(255, rel * generation, rel * generation);
+			ofSetColor(255, 255 - rel_generation * generation, 255 - rel_generation * generation);
 			ofRect(coordx, coordy, 0, cellWidth * 0.2, cellHeight * 0.2);
 		}
 	}
