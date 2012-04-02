@@ -6,10 +6,15 @@
 #include "AcceptIfConnectedRule.h"
 #include "AssignResourcesRule.h"
 
+cellularApp::cellularApp() : ofBaseApp()
+{
+	_cellGrid = new CellGrid();
+	simulationSpeed = 1;
+}
+
 //--------------------------------------------------------------
 void cellularApp::setup()
 {
-	_cellGrid = new CellGrid();
 	_cellGrid->Setup(MEGASTRUCTURE_CELL, 20, 20);
 
 	DecayingCellRule rule1;
@@ -19,8 +24,6 @@ void cellularApp::setup()
 	_cellGrid->AddCellRule(&rule1);
 	_cellGrid->AddGlobalRule(&rule2);
 	_cellGrid->AddAcceptRule(&rule3);
-
-	simulationSpeed = 1;
 }
 
 //--------------------------------------------------------------

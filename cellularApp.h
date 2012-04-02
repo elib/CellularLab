@@ -2,9 +2,11 @@
 
 #include "ofMain.h"
 
-class cellularApp : public ofBaseApp{
-
+class cellularApp : public ofBaseApp
+{
 	public:
+
+		cellularApp();
 
 		void setup();
 		void update();
