@@ -37,7 +37,7 @@ void DecayingCellRule::ApplyRule(BaseCell* cell, CellGrid* grid, int index_x, in
 	if(neighborcount > 4)
 	{
 		//non-deterministic increase in decay
-		int amount_to_increase = (rand() % 2) + 1;
+		int amount_to_increase = 2; //(rand() % 2) + 1;
 		cell->CellProperties["decay"] = min(thisdecay + amount_to_increase, MAX_DECAY);
 	}
 	

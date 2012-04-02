@@ -37,6 +37,8 @@ public:
 
 	int gridWidth, gridHeight;
 
+	int cellGeneration;
+
 private:
 
 	BaseCell *** _currentCells;

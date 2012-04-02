@@ -14,6 +14,7 @@ CellGrid::CellGrid(void)
 {
 	gridWidth = 0;
 	gridHeight = 0;
+	cellGeneration = 0;
 	
 	_currentCells = NULL;
 	_nextCells = NULL;
@@ -90,6 +91,8 @@ void CellGrid::Update()
 	{
 		return;
 	}
+
+	cellGeneration ++;
 
 	bool accepted = false;
 	while(!accepted)
@@ -192,4 +195,12 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			ofRect(coordx, coordy, 0, cellWidth * 0.2, cellHeight * 0.2);
 		}
 	}
+
+	//draw generation count
+	ofSetRectMode(OF_RECTMODE_CORNER);
+	ofSetColor(0,0,255, 150);
+	ofRect(screenwid - 200, screenhei - 20, 200, 20);
+	ofSetColor(255);
+	string genStr = "cellular generation " + ofToString(cellGeneration);
+	ofDrawBitmapString(genStr, screenwid - 180, screenhei - 5);
 }

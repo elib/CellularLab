@@ -7,6 +7,7 @@ int main( ){
 
 	ofAppGlutWindow window;
 	ofSetupOpenGL(&window, 600, 600, OF_WINDOW);			// <-------- setup the GL context
+	ofEnableAlphaBlending();
 
 	//int wid = 1200;
 	//float aspect = 1.77f;
