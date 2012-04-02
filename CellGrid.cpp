@@ -15,7 +15,8 @@ CellGrid::CellGrid(void)
 	gridWidth = 0;
 	gridHeight = 0;
 	cellGeneration = 0;
-	
+	total_decay = 0;
+
 	_currentCells = NULL;
 	_nextCells = NULL;
 }
@@ -105,6 +106,16 @@ void CellGrid::Update()
 
 	//we should be accepted by now, so copy back to _currentGrid
 	copyToTarget(_nextCells, _currentCells);
+
+	//update current decay counts
+	total_decay = 0;
+	for(int x = 0; x < gridWidth; x++)
+	{
+		for(int y = 0; y < gridHeight; y++)
+		{
+			total_decay += _currentCells[x][y]->CellProperties.at("decay");
+		}
+	}
 }
 
 void CellGrid::copyToTarget(BaseCell *** source, BaseCell *** target)
@@ -199,8 +210,9 @@ void CellGrid::Draw(int screenwid, int screenhei)
 	//draw generation count
 	ofSetRectMode(OF_RECTMODE_CORNER);
 	ofSetColor(0,0,255, 150);
-	ofRect(screenwid - 200, screenhei - 20, 200, 20);
+	ofRect(screenwid - 200, screenhei - 30, 200, 30);
 	ofSetColor(255);
-	string genStr = "cellular generation " + ofToString(cellGeneration);
-	ofDrawBitmapString(genStr, screenwid - 180, screenhei - 5);
+	string genStr = "cellular generation " + ofToString(cellGeneration) + "\r\n"
+		+ "Total/avg decay " + ofToString(total_decay) + "/" + ofToString(total_decay / ((float) gridWidth * gridHeight), 2) ;
+	ofDrawBitmapString(genStr, screenwid - 190, screenhei - 15);
 }

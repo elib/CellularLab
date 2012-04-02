@@ -39,6 +39,8 @@ public:
 
 	int cellGeneration;
 
+	int total_decay;
+
 private:
 
 	BaseCell *** _currentCells;
