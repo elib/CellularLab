@@ -8,6 +8,8 @@
 
 #include "ofMain.h"
 
+#include "MegastructureConstants.h"
+
 CellGrid::CellGrid(void)
 {
 	gridWidth = 0;
@@ -168,12 +170,9 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			float coordx = (x + 0.5) * cellWidth;
 			float coordy = (y + 0.5) * cellHeight;
 
-			const int MAX_DECAY = 10;
-			const int MAX_GENERATION = 10;
-
 			int decay, generation;
 			int rel_decay = 255 / MAX_DECAY;
-			int rel_generation = 255 / MAX_GENERATION;
+			int rel_generation = 255 / MAX_GENERATIONS;
 			decay = GetCurrentConfigurationAt(x, y)->CellProperties.at("decay");
 			generation = GetCurrentConfigurationAt(x, y)->CellProperties.at("generation");
 
