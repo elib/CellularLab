@@ -6,6 +6,7 @@
 using namespace std;
 
 typedef map<string, int> PropertyList;
+typedef PropertyList::iterator PropertyListIterator;
 
 class BaseCell
 {

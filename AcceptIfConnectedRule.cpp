@@ -20,5 +20,5 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 
 BaseAcceptNewConfigRule* AcceptIfConnectedRule::Copy()
 {
-	return new AcceptIfConnectedRule();
+	return new AcceptIfConnectedRule(*this);
 }

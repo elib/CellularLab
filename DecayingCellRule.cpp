@@ -20,5 +20,5 @@ void DecayingCellRule::ApplyRule(BaseCell* cell, CellGrid* grid, int index_x, in
 
 BaseSingleCellRule* DecayingCellRule::Copy()
 {
-	return new DecayingCellRule();
+	return new DecayingCellRule(*this);
 }

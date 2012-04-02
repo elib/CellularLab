@@ -1,8 +1,11 @@
 #include "MegastructureCell.h"
+#include <math.h>
 
 
 MegastructureCell::MegastructureCell(void)
 {
+	CellProperties["decay"] = rand() % 10;
+	CellProperties["generation"] = rand() % 10;
 }
 
 
@@ -12,12 +15,6 @@ MegastructureCell::~MegastructureCell(void)
 
 BaseCell* MegastructureCell::Copy()
 {
-	MegastructureCell* newcell = new MegastructureCell();
-	for(unsigned int i = 0; i < CellProperties.size(); i++)
-	{
-		//copy properties
-		//newcell->CellProperties
-	}
-
+	MegastructureCell* newcell = new MegastructureCell(*this);
 	return newcell;
 }

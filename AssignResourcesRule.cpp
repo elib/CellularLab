@@ -19,5 +19,5 @@ void AssignResourcesRule::ApplyRule(CellGrid* grid)
 
 BaseEntireGridRule* AssignResourcesRule::Copy()
 {
-	return new AssignResourcesRule();
+	return new AssignResourcesRule(*this);
 }
