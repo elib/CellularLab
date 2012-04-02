@@ -19,12 +19,14 @@ void cellularApp::setup()
 	_cellGrid->AddCellRule(&rule1);
 	_cellGrid->AddGlobalRule(&rule2);
 	_cellGrid->AddAcceptRule(&rule3);
+
+	simulationSpeed = 1;
 }
 
 //--------------------------------------------------------------
 void cellularApp::update()
 {
-	_cellGrid->Update();
+	_cellGrid->Update(simulationSpeed);
 }
 
 //--------------------------------------------------------------
@@ -40,8 +42,11 @@ void cellularApp::keyPressed  (int key)
 {
     switch (key){
         case 'a':
-            //rotateAmount.z -= 0.05f;
+            simulationSpeed += 1;
             break;
+		case 'z':
+			simulationSpeed  = max(simulationSpeed - 1, 1);
+			break;
     }
 }
 

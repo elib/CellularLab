@@ -84,11 +84,12 @@ void CellGrid::Setup(CellTypes cellTypeToCreate, int width, int height)
 	InitCells(cellTypeToCreate, &_nextCells);
 }
 
-void CellGrid::Update()
+void CellGrid::Update(int speed)
 {
 	//decide if another generation is necessary (else exit)
 	int frames = ofGetFrameNum();
-	if(frames % 60 != 0)
+	int modFrames = max(1, 60 / speed);
+	if(frames % modFrames != 0)
 	{
 		return;
 	}
@@ -214,5 +215,5 @@ void CellGrid::Draw(int screenwid, int screenhei)
 	ofSetColor(255);
 	string genStr = "cellular generation " + ofToString(cellGeneration) + "\r\n"
 		+ "Total/avg decay " + ofToString(total_decay) + "/" + ofToString(total_decay / ((float) gridWidth * gridHeight), 2) ;
-	ofDrawBitmapString(genStr, screenwid - 190, screenhei - 15);
+	ofDrawBitmapString(genStr, screenwid - 200, screenhei - 15);
 }

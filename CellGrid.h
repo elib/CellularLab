@@ -23,7 +23,7 @@ public:
 	CellGrid(void);
 	~CellGrid(void);
 
-	void Update();
+	void Update(int speed);
 	void Draw(int screenwid, int screenhei);
 	void Setup(CellTypes typeToCreate, int width, int height);
 
