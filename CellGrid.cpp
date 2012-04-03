@@ -98,13 +98,23 @@ void CellGrid::Update(int speed)
 	//another generation
 	cellGeneration ++;
 
+	int tries = 1;
+
 	bool accepted = false;
-	while(!accepted)
+	while(!accepted && tries < 50)
 	{
 		copyToNext();
 		applySingleCellRules();
 		applyEntireGridRules();
 		accepted = doesAcceptNewConfiguration();
+		tries++;
+	}
+
+	if(tries >= 50)
+	{
+		//ya kaduda -- we can't sir
+		int j = 4;
+		exit(100);
 	}
 
 	//we should be accepted by now, so copy back to _currentGrid
