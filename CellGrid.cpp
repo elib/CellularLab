@@ -88,12 +88,14 @@ void CellGrid::Update(int speed)
 {
 	//decide if another generation is necessary (else exit)
 	int frames = ofGetFrameNum();
-	int modFrames = max(1, 60 / speed);
+	float framerate = ofGetFrameRate();
+	int modFrames = max(1, (int)(framerate / speed));
 	if(frames % modFrames != 0)
 	{
 		return;
 	}
 
+	//another generation
 	cellGeneration ++;
 
 	bool accepted = false;

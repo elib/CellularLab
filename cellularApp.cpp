@@ -5,12 +5,13 @@
 #include "DecayingCellRule.h"
 #include "AcceptIfConnectedRule.h"
 #include "AssignResourcesRule.h"
+#include "CellConstants.h"
 
 //--------------------------------------------------------------
 void cellularApp::setup()
 {
 	_cellGrid = new CellGrid();
-	_cellGrid->Setup(MEGASTRUCTURE_CELL, 20, 20);
+	_cellGrid->Setup(MEGASTRUCTURE_CELL, CELL_X, CELL_Y);
 
 	DecayingCellRule rule1;
 	AssignResourcesRule rule2;
