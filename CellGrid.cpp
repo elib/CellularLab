@@ -19,6 +19,7 @@ CellGrid::CellGrid(void)
 
 	_currentCells = NULL;
 	_nextCells = NULL;
+	_edges = NULL;
 }
 
 CellGrid::~CellGrid(void)
@@ -43,12 +44,22 @@ void CellGrid::AddAcceptRule(BaseAcceptNewConfigRule* newRule)
 	_acceptNewConfigRules.push_back(rule);
 }
 
+const BaseCell* CellGrid::GetCurrentConfigurationEffectiveAt(int x, int y)
+{
+	return getEffectiveCell(_currentCells, x, y);
+}
+
+const BaseCell* CellGrid::GetNextConfigurationEffectiveAt(int x, int y)
+{
+	return getEffectiveCell(_nextCells, x, y);
+}
+
 const BaseCell* CellGrid::GetCurrentConfigurationAt(int x, int y)
 {
 	return getCell(_currentCells, x, y);
 }
 
-const BaseCell* CellGrid::GetNextConfiguratonAt(int x, int y)
+const BaseCell* CellGrid::GetNextConfigurationAt(int x, int y)
 {
 	return getCell(_nextCells, x, y);
 }
@@ -64,6 +75,75 @@ const BaseCell* CellGrid::getCell(BaseCell*** target, int x, int y)
 	int useY = (y + gridHeight) % gridHeight;
 
 	return static_cast<const BaseCell*>(target[useX][useY]);
+}
+
+const BaseCell* CellGrid::getEffectiveCell(BaseCell*** target, int x, int y)
+{
+	//here we go again, on our own :/
+
+	/*
+	DIAGRAM -- start on top left, go right
+
+	******+
+	x	  +		-
+	x	  +
+	x	  +		5 = gridHeight
+	x	  +
+	x	  +		-
+	x------
+	 | 5 |
+
+	*/
+
+	int topLeft_corner = 0;
+	int topRight_corner = topLeft_corner + gridWidth + 1;
+	int bottomRight_corner = topRight_corner + gridHeight + 1;
+	int bottomLeft_corner = bottomRight_corner + gridWidth + 1;
+
+
+	if(x == -1 && y == -1)
+	{
+		return _edges[topLeft_corner];
+	}
+
+	if(x == gridWidth && y == 0)
+	{
+		return _edges[topRight_corner];
+	}
+
+	if(x == gridWidth && y == gridHeight)
+	{
+		return _edges[bottomRight_corner];
+	}
+
+	if(x == -1 && y == gridHeight)
+	{
+		return _edges[bottomLeft_corner];
+	}
+
+	//edges ....
+	if(y == -1)
+	{
+		return _edges[topLeft_corner + x + 1];
+	}
+
+	if(x == gridWidth)
+	{
+		return _edges[topRight_corner + y + 1];
+	}
+
+	if(y == gridHeight)
+	{
+		return _edges[bottomRight_corner + 1 + (gridWidth - x - 1)];
+	}
+
+	if(x == -1) //final case
+	{
+		return _edges[bottomLeft_corner + 1 + (gridHeight - y - 1)];
+	}
+
+	///still here????? I guess you want SOMETHING FROM THE ACTUAL GRID
+	return target[x][y];
 }
 
 BaseCell* CellGrid::getCellForEdit(BaseCell*** target, int x, int y)
@@ -95,6 +175,14 @@ void CellGrid::Setup(CellTypes cellTypeToCreate, int width, int height)
 	gridHeight = height;
 	InitCells(cellTypeToCreate, &_currentCells);
 	InitCells(cellTypeToCreate, &_nextCells);
+
+	int totalEdges = (width + 1)*2 + (height + 1) *2;
+	_edges = new BaseCell*[totalEdges];
+	for(int i = 0; i < totalEdges; i++)
+	{
+		_edges[i] = CellFactory::CreateBaseCell(cellTypeToCreate);
+	}
+
 }
 
 void CellGrid::Update(int speed)
@@ -114,7 +202,7 @@ void CellGrid::Update(int speed)
 	int tries = 1;
 
 	bool accepted = false;
-	while(!accepted && tries < 50)
+	while(!accepted && tries < 100)
 	{
 		copyToNext();
 		applySingleCellRules();
@@ -123,7 +211,7 @@ void CellGrid::Update(int speed)
 		tries++;
 	}
 
-	if(tries >= 50)
+	if(!accepted)
 	{
 		//ya kaduda -- we can't sir
 		int j = 4;
@@ -200,21 +288,21 @@ void CellGrid::copyToNext()
 void CellGrid::Draw(int screenwid, int screenhei)
 {
 	//run over current generation and draw them
-	float cellWidth = screenwid / ((float) gridWidth);
-	float cellHeight = screenhei / ((float) gridHeight);
+	float cellWidth = screenwid / ((float) gridWidth + 2);
+	float cellHeight = screenhei / ((float) gridHeight + 2);
 
-	for(int x = 0; x < gridWidth; x++)
+	for(int x = -1; x < gridWidth+1; x++)
 	{
-		for(int y = 0; y < gridHeight; y++)
+		for(int y = -1; y < gridHeight+1; y++)
 		{
-			float coordx = (x + 0.5) * cellWidth;
-			float coordy = (y + 0.5) * cellHeight;
+			float coordx = (x + 1.5) * cellWidth;
+			float coordy = (y + 1.5) * cellHeight;
 
 			int decay, generation;
 			int rel_decay = 255 / MAX_DECAY;
 			int rel_generation = 255 / MAX_GENERATIONS;
-			decay = GetCurrentConfigurationAt(x, y)->CellProperties.at("decay");
-			generation = GetCurrentConfigurationAt(x, y)->CellProperties.at("generation");
+			decay = GetCurrentConfigurationEffectiveAt(x, y)->CellProperties.at("decay");
+			generation = GetCurrentConfigurationEffectiveAt(x, y)->CellProperties.at("generation");
 
 			ofSetRectMode(OF_RECTMODE_CENTER);
 			ofFill();

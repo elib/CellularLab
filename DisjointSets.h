@@ -5,6 +5,9 @@
 #pragma once
 #include "CellConstants.h"
 
+
+#define NODE_COUNT ((CELL_X + 2) * (CELL_Y + 2))
+
 class DisjointSets
 {
 public:
@@ -45,5 +48,5 @@ private:
 
 	int m_numElements; // the number of elements currently in the DisjointSets data structure.
 	int m_numSets; // the number of sets currently in the DisjointSets data structure.
-	Node* m_nodes[CELL_X * CELL_Y]; // the list of nodes representing the elements
+	Node* m_nodes[NODE_COUNT]; // the list of nodes representing the elements
 };

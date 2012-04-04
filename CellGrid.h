@@ -33,7 +33,9 @@ public:
 	void AddAcceptRule(BaseAcceptNewConfigRule* newRule);
 
 	const BaseCell* GetCurrentConfigurationAt(int x, int y);
-	const BaseCell* GetNextConfiguratonAt(int x, int y);
+	const BaseCell* GetCurrentConfigurationEffectiveAt(int x, int y);
+	const BaseCell* GetNextConfigurationAt(int x, int y);
+	const BaseCell* GetNextConfigurationEffectiveAt(int x, int y);
 	BaseCell* GetNextConfigurationForEditAt(int x, int y);
 	
 
@@ -45,8 +47,12 @@ public:
 
 private:
 
+	//inside the grid
 	BaseCell *** _currentCells;
 	BaseCell *** _nextCells;
+
+	//handle grid edges here
+	BaseCell ** _edges;
 
 	void copyToTarget(BaseCell *** source, BaseCell *** target);
 	void copyToNext();
@@ -55,6 +61,7 @@ private:
 	bool doesAcceptNewConfiguration();
 
 	const BaseCell* getCell(BaseCell*** target, int x, int y);
+	const BaseCell* getEffectiveCell(BaseCell*** target, int x, int y);
 	BaseCell* getCellForEdit(BaseCell*** target, int x, int y);
 
 	void InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid);

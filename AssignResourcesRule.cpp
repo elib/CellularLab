@@ -22,7 +22,7 @@ void AssignResourcesRule::ApplyRule(CellGrid* grid)
 	//assign "resources" to random cells?
 	//(reduce decay and increase generation)
 
-	int resources = 20;
+	int resources = 30;
 	for(int i = 0; i < resources; i++)
 	{
 		int coordx = rand() % grid->gridWidth;

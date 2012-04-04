@@ -23,9 +23,9 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 		for(int y = 0; y < grid->gridHeight; y++)
 		{
 			//each cell: connect to neighbors on right-bottom sides
-			int thisdecay = grid->GetNextConfiguratonAt(x, y)->CellProperties.at("decay");
-			int rightdecay = grid->GetNextConfiguratonAt(x + 1, y)->CellProperties.at("decay");
-			int belowdecay = grid->GetNextConfiguratonAt(x, y + 1)->CellProperties.at("decay");
+			int thisdecay = grid->GetNextConfigurationEffectiveAt(x, y)->CellProperties.at("decay");
+			int rightdecay = grid->GetNextConfigurationEffectiveAt(x + 1, y)->CellProperties.at("decay");
+			int belowdecay = grid->GetNextConfigurationEffectiveAt(x, y + 1)->CellProperties.at("decay");
 
 			//to be connected to a neighbor:
 			// * you must be relatively closely decayed

@@ -22,7 +22,7 @@ using namespace std;
 
 DisjointSets::DisjointSets()
 {
-	m_numElements = CELL_X*CELL_Y;
+	m_numElements = NODE_COUNT;
 	for(int i = 0; i < m_numElements; i++)
 		m_nodes[i] = NULL;
 
@@ -56,19 +56,19 @@ void DisjointSets::Reset()
 // Note: some internal data is modified for optimization even though this method is consant.
 int DisjointSets::FindSet(int elementId) const
 {
-	//assert(elementId < m_numElements);
+	assert(elementId < m_numElements);
 
 	Node* curNode;
 
 	// Find the root element that represents the set which `elementId` belongs to
-	curNode = m_nodes[elementId % m_numElements];
+	curNode = m_nodes[elementId];
 	while(curNode->parent != NULL)
 		curNode = curNode->parent;
 	Node* root = curNode;
 
 	// Walk to the root, updating the parents of `elementId`. Make those elements the direct
 	// children of `root`. This optimizes the tree for future FindSet invokations.
-	curNode = m_nodes[elementId % m_numElements];
+	curNode = m_nodes[elementId];
 	while(curNode != root)
 	{
 		Node* next = curNode->parent;
