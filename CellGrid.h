@@ -34,6 +34,8 @@ public:
 
 	const BaseCell* GetCurrentConfigurationAt(int x, int y);
 	const BaseCell* GetNextConfiguratonAt(int x, int y);
+	BaseCell* GetNextConfigurationForEditAt(int x, int y);
+	
 
 	int gridWidth, gridHeight;
 
@@ -53,6 +55,7 @@ private:
 	bool doesAcceptNewConfiguration();
 
 	const BaseCell* getCell(BaseCell*** target, int x, int y);
+	BaseCell* getCellForEdit(BaseCell*** target, int x, int y);
 
 	void InitCells(CellTypes cellTypeToCreate, BaseCell**** targetGrid);
 

@@ -30,11 +30,11 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 			//to be connected to a neighbor:
 			// * you must be relatively closely decayed
 			// * both sides must be below a certain decay threshold
-			int maxDecayDiff = 5;
 			int maxDecay = 10;
 
 			if(thisdecay <= maxDecay)
 			{
+				int maxDecayDiff = 5;
 				if(abs(thisdecay - rightdecay) <= maxDecayDiff)
 				{
 					if(rightdecay <= maxDecay)

@@ -29,7 +29,7 @@ public:
 
 #ifdef WIN_32
 #ifdef _DEBUG
-		void DisjointSets::DebugPrint(int wid, int hei);
+		void DebugPrint(int wid, int hei);
 #endif
 #endif
 

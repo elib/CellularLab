@@ -53,12 +53,25 @@ const BaseCell* CellGrid::GetNextConfiguratonAt(int x, int y)
 	return getCell(_nextCells, x, y);
 }
 
+BaseCell* CellGrid::GetNextConfigurationForEditAt(int x, int y)
+{
+	return getCellForEdit(_nextCells, x, y);
+}
+
 const BaseCell* CellGrid::getCell(BaseCell*** target, int x, int y)
 {
 	int useX = (x + gridWidth) % gridWidth;
 	int useY = (y + gridHeight) % gridHeight;
 
 	return static_cast<const BaseCell*>(target[useX][useY]);
+}
+
+BaseCell* CellGrid::getCellForEdit(BaseCell*** target, int x, int y)
+{
+	int useX = (x + gridWidth) % gridWidth;
+	int useY = (y + gridHeight) % gridHeight;
+
+	return target[useX][useY];
 }
 
 
