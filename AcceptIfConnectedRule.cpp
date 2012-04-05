@@ -35,15 +35,15 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 
 			if(thisdecay <= maxDecay)
 			{
-				int maxDecayDiff = 5;
-				if(abs(thisdecay - rightdecay) <= maxDecayDiff)
+				//int maxDecayDiff = 5;
+				//if(abs(thisdecay - rightdecay) <= maxDecayDiff)
 				{
 					if(rightdecay <= maxDecay)
 					{
 						sets.Union(sets.FindSet(x + grid->gridWidth * y), sets.FindSet((x+1) + grid->gridWidth * y));
 					}
 
-					if(abs(thisdecay - belowdecay) <= maxDecayDiff)
+					//if(abs(thisdecay - belowdecay) <= maxDecayDiff)
 					{
 						if(belowdecay <= maxDecay)
 						{
