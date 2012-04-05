@@ -3,6 +3,7 @@
 
 #include "DisjointSets.h"
 #include "BaseCell.h"
+#include "MegastructureConstants.h"
 
 AcceptIfConnectedRule::AcceptIfConnectedRule(void)
 {
@@ -30,7 +31,7 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 			//to be connected to a neighbor:
 			// * you must be relatively closely decayed
 			// * both sides must be below a certain decay threshold
-			int maxDecay = 10;
+			int maxDecay = MAX_CONNECTED_DECAY;
 
 			if(thisdecay <= maxDecay)
 			{

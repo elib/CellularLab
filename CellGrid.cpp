@@ -315,6 +315,17 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			ofSetColor(255);
 			ofRect(coordx, coordy, 0, cellWidth * 0.8, cellHeight * 0.9);
 
+			if(decay < MAX_CONNECTED_DECAY)
+			{
+				//draw double border
+				ofSetColor(decay * rel_decay);
+				ofRect(coordx, coordy, 0, cellWidth * 0.7, cellHeight * 0.7);
+
+				//white "background" square"
+				ofSetColor(255);
+				ofRect(coordx, coordy, 0, cellWidth * 0.6, cellHeight * 0.6);
+			}
+
 			//inner square -- generation indicator (redder is newer)
 			ofSetColor(255, 255 - rel_generation * generation, 255 - rel_generation * generation);
 			ofRect(coordx, coordy, 0, cellWidth * 0.2, cellHeight * 0.2);
