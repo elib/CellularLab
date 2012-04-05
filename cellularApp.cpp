@@ -11,6 +11,7 @@ cellularApp::cellularApp() : ofBaseApp()
 {
 	_cellGrid = new CellGrid();
 	simulationSpeed = 1;
+	_shouldUpdate = true;
 }
 
 //--------------------------------------------------------------
@@ -30,13 +31,16 @@ void cellularApp::setup()
 //--------------------------------------------------------------
 void cellularApp::update()
 {
-	_cellGrid->Update(simulationSpeed);
+	if(_shouldUpdate)
+	{
+		_cellGrid->Update(simulationSpeed);
+	}
 }
 
 //--------------------------------------------------------------
 void cellularApp::draw()
 {
-	ofBackground(100, 255);
+	ofBackground(255, 255);
 	_cellGrid->Draw(ofGetViewportWidth(), ofGetViewportHeight());
 
 }
@@ -50,6 +54,9 @@ void cellularApp::keyPressed  (int key)
             break;
 		case 'z':
 			simulationSpeed  = max(simulationSpeed - 1, 1);
+			break;
+		case ' ':
+			_shouldUpdate = !_shouldUpdate;
 			break;
     }
 }

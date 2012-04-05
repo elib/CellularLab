@@ -26,6 +26,8 @@ class cellularApp : public ofBaseApp
 private:
 	class CellGrid* _cellGrid;
 
+	bool _shouldUpdate;
+
 	int simulationSpeed;
 };
 

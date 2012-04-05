@@ -298,33 +298,41 @@ void CellGrid::Draw(int screenwid, int screenhei)
 			float coordx = (x + 1.5) * cellWidth;
 			float coordy = (y + 1.5) * cellHeight;
 
-			int decay, generation;
+			int decay, generation, group;
 			int rel_decay = 255 / MAX_DECAY;
 			int rel_generation = 255 / MAX_GENERATIONS;
 			decay = GetCurrentConfigurationEffectiveAt(x, y)->CellProperties.at("decay");
 			generation = GetCurrentConfigurationEffectiveAt(x, y)->CellProperties.at("generation");
+			group = GetCurrentConfigurationEffectiveAt(x, y)->CellProperties.at("group");
 
 			ofSetRectMode(OF_RECTMODE_CENTER);
 			ofFill();
 
 			//Border -- gets lighter as decays
-			ofSetColor(decay * rel_decay);
+			if(group == 1)
+			{
+				ofSetColor(0, 0, 255, (MAX_DECAY - decay) * rel_decay);
+			}
+			else
+			{
+				ofSetColor(0, 255, 0, (MAX_DECAY - decay) * rel_decay);
+			}
 			ofRect(coordx, coordy, 0, cellWidth, cellHeight);
 
 			//white "background" square"
 			ofSetColor(255);
 			ofRect(coordx, coordy, 0, cellWidth * 0.8, cellHeight * 0.9);
 
-			if(decay < MAX_CONNECTED_DECAY)
-			{
-				//draw double border
-				ofSetColor(decay * rel_decay);
-				ofRect(coordx, coordy, 0, cellWidth * 0.7, cellHeight * 0.7);
+			//if(decay < MAX_CONNECTED_DECAY)
+			//{
+			//	//draw double border
+			//	ofSetColor(decay * rel_decay);
+			//	ofRect(coordx, coordy, 0, cellWidth * 0.7, cellHeight * 0.7);
 
-				//white "background" square"
-				ofSetColor(255);
-				ofRect(coordx, coordy, 0, cellWidth * 0.6, cellHeight * 0.6);
-			}
+			//	//white "background" square
+			//	ofSetColor(255);
+			//	ofRect(coordx, coordy, 0, cellWidth * 0.6, cellHeight * 0.6);
+			//}
 
 			//inner square -- generation indicator (redder is newer)
 			ofSetColor(255, 255 - rel_generation * generation, 255 - rel_generation * generation);

@@ -6,6 +6,7 @@ MegastructureCell::MegastructureCell(void)
 {
 	CellProperties["decay"] = rand() % 2;
 	CellProperties["generation"] = rand() % 2;
+	CellProperties["group"] = 0;
 }
 
 

@@ -33,23 +33,15 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 			// * both sides must be below a certain decay threshold
 			int maxDecay = MAX_CONNECTED_DECAY;
 
-			if(thisdecay <= maxDecay)
+			if(thisdecay < maxDecay)
 			{
-				//int maxDecayDiff = 5;
-				//if(abs(thisdecay - rightdecay) <= maxDecayDiff)
+				if(rightdecay < maxDecay)
 				{
-					if(rightdecay <= maxDecay)
-					{
-						sets.Union(sets.FindSet(x + grid->gridWidth * y), sets.FindSet((x+1) + grid->gridWidth * y));
-					}
-
-					//if(abs(thisdecay - belowdecay) <= maxDecayDiff)
-					{
-						if(belowdecay <= maxDecay)
-						{
-							sets.Union(sets.FindSet(x + grid->gridWidth * y), sets.FindSet(x + grid->gridWidth * (y+1)));
-						}
-					}
+					sets.Union(sets.FindSet(x + grid->gridWidth * y), sets.FindSet((x+1) + grid->gridWidth * y));
+				}
+				if(belowdecay < maxDecay)
+				{
+					sets.Union(sets.FindSet(x + grid->gridWidth * y), sets.FindSet(x + grid->gridWidth * (y+1)));
 				}
 			}
 		}
@@ -71,14 +63,25 @@ bool AcceptIfConnectedRule::AcceptRule(CellGrid* grid)
 	//	sets.Union(setRight, sets.FindSet((CELL_X - 1) + grid->gridWidth*(CELL_Y/2 - 1)));
 	//}
 
-
+	bool willReturnTrue = false;
 	if (setTop == setBottom && setBottom == setLeft && setLeft == setRight)
 	{
-		return true;
+		willReturnTrue = true;
+
+		for(int x = 0; x < grid->gridWidth; x++)
+		{
+			for(int y = 0; y < grid->gridHeight; y++)
+			{
+				//mark the groups according to connectiveness to "proper" edges
+				int thisid = sets.FindSet(x + grid->gridWidth*y);
+				int group = (thisid == setTop) ? 1 : 0;
+				grid->GetNextConfigurationForEditAt(x, y)->CellProperties["group"] = group;
+			}
+		}
 	}
 
 
-	return false;
+	return willReturnTrue;
 }
 
 BaseAcceptNewConfigRule* AcceptIfConnectedRule::Copy()
